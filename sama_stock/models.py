@@ -21,7 +21,7 @@ class Produit(models.Model):
         return f"\n Nom: {self.nom} \n Description: {self.desciption} \n Prix: {self.prix}"
     
     def is_valid_produit(self):
-        return self.nom != "" and self.prix > 0
+        return self.nom != "" or self.prix > 0
 
 
 class Client(models.Model):

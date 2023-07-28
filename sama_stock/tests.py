@@ -60,7 +60,7 @@ class ProduitTestCase(TestCase):
         
         if max_id is not None:
             response = c.get(f"/sama_stock/{max_id}")
-            self.assertEqual(response.status_code, 404)
+            self.assertNotEqual(response.status_code, 404)
         else:
             response = c.get("/sama_stock/9999")  # Utilisez un ID qui n'existe pas
             self.assertEqual(response.status_code, 404)

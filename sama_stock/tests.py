@@ -33,12 +33,12 @@ class ProduitTestCase(TestCase):
     def test_invalid_produit_prix(self):
         b = Boutique.objects.create(nom="Boutique 2",lieu="Keur Massar")
         p = Produit.objects.create(nom="King",desciption="Gang",prix=0,boutique=b)
-        self.assertTrue(p.is_valid_produit())
+        self.assertFalse(p.is_valid_produit())
     
     def test_invalid_produit_nom(self):
         b = Boutique.objects.create(nom="Boutique 2",lieu="Keur Massar")
         p = Produit.objects.create(nom="",desciption="Gang",prix=200,boutique=b)
-        self.assertTrue(p.is_valid_produit())
+        self.assertFalse(p.is_valid_produit())
         
     def test_index(self):
         c = HtppClient()
@@ -60,7 +60,7 @@ class ProduitTestCase(TestCase):
         
         if max_id is not None:
             response = c.get(f"/sama_stock/{max_id}")
-            self.assertNotEqual(response.status_code, 404)
+            self.assertEqual(response.status_code, 200)
         else:
             response = c.get("/sama_stock/9999")  # Utilisez un ID qui n'existe pas
             self.assertEqual(response.status_code, 404)

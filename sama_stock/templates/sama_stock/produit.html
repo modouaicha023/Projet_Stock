@@ -1,0 +1,40 @@
+{% extends "sama_stock/layout.html" %}
+
+{% block body %}
+<div class="d-flex justify-content-center  grid gap-3">
+
+    <div class="card p-2 g-col-6 mt-3" style="width: 18rem;">
+        <div class="card-body ">
+            <h5 class="card-title">{{ produit.nom }}</h5>
+            <p class="card-text">{{ produit.desciption}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{produit.prix}}</li>
+        </ul>
+        <div class="card-body">
+            <a href="#" class="card-link">Modifer</a>
+        </div>
+        {% for client in clients %}
+        <div class="card-body ">
+            <h1 class="card-title">{{ client }}</h1>
+        </div>
+        {% empty %}
+        <div class="card-body ">
+            <h1 class="card-title">No Client</h1>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<form action="{% url 'book' produit.id %}" method="post">
+{% csrf_token %}
+<select name="client">
+    {% for client in no_clients %}
+    <option value="{{ client.id }}">{{ client }}</option>
+    {% endfor %}
+</select>
+<input type="submit" >
+</form>
+<a href="{% url 'index' %}">Back to home</a>
+
+
+{% endblock %}

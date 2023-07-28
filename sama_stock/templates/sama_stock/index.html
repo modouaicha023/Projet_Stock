@@ -1,0 +1,25 @@
+{% extends "sama_stock/layout.html" %}
+
+{% block body %}
+
+
+<div class="d-flex justify-content-center  grid gap-3">
+    {% for produit in produits %}
+    <a href="{% url 'produit' produit.id %}">
+        <div class="card p-2 g-col-6 mt-3" style="width: 18rem;">
+            <div class="card-body ">
+                <h5 class="card-title">{{ produit.nom }}</h5>
+                <p class="card-text">{{ produit.desciption}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{produit.prix}}</li>
+            </ul>
+            <div class="card-body">
+                <a href="#" class="card-link">Modifer</a>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+{% endblock %}
